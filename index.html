@@ -25,7 +25,6 @@
       color: var(--fg);
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
       min-height: 100vh;
       text-align: center;
@@ -55,10 +54,11 @@
       transform: scale(1.05);
     }
 
-    .links {
+    .links, .projects {
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      align-items: center;
     }
 
     .card {
@@ -73,6 +73,41 @@
     .card:hover {
       background: rgba(56, 189, 248, 0.1);
       transform: translateY(-3px);
+    }
+
+    section {
+      width: 100%;
+      max-width: 900px;
+      margin-top: 3rem;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    .project-card {
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 10px;
+      padding: 1.2rem;
+      background: rgba(255, 255, 255, 0.05);
+      transition: all 0.2s ease;
+    }
+
+    .project-card:hover {
+      background: rgba(56, 189, 248, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .project-card h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .project-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
     }
 
     footer {
@@ -91,9 +126,10 @@
   <h1>👋 Hi, I’m Shriyansh Sharma</h1>
   <h2>Developer | ML Enthusiast | Tech Explorer</h2>
 
+  <!-- Featured Links -->
   <div class="links">
     <div class="card">
-      <h3> Machine Learning Project</h3>
+      <h3>🚀 Machine Learning Project</h3>
       <p><a href="https://shriyansh-churn-demo.streamlit.app/" target="_blank">Customer Churn Prediction App</a></p>
     </div>
 
@@ -102,6 +138,32 @@
       <p><a href="https://github.com/notshriyansh" target="_blank">github.com/shriyansh-sharma</a></p>
     </div>
   </div>
+
+  <!-- Future Projects Section -->
+  <section>
+    <h2>🧠 Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>🔍 NLP Sentiment Analyzer</h3>
+        <p>A tool to analyze and visualize sentiment from tweets using transformers.</p>
+      </div>
+
+      <div class="project-card">
+        <h3>🕹️ Reinforcement Learning Agent</h3>
+        <p>Deep Q-Learning agent that learns to play Atari games (inspired by DeepMind’s DQN).</p>
+      </div>
+
+      <div class="project-card">
+        <h3>📊 Data Logger API</h3>
+        <p>Full-stack Node.js API for IoT data logging and visualization with JWT authentication.</p>
+      </div>
+
+      <div class="project-card">
+        <h3>💡 Coming Soon</h3>
+        <p>More exciting projects will be added here as I build and deploy them!</p>
+      </div>
+    </div>
+  </section>
 
   <footer>Made with ❤️ &amp; caffeine | © 2025 Shriyansh Sharma</footer>
 </body>
