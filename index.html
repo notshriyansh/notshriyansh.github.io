@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shriyansh Sharma</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --fg: #e2e8f0;
+      --accent: #38bdf8;
+      --muted: #94a3b8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "IBM Plex Mono", monospace;
+      background: var(--bg);
+      color: var(--fg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-weight: 400;
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    a:hover {
+      color: #7dd3fc;
+      transform: scale(1.05);
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .card {
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 10px;
+      padding: 1rem 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      transition: all 0.2s ease;
+      width: 300px;
+    }
+
+    .card:hover {
+      background: rgba(56, 189, 248, 0.1);
+      transform: translateY(-3px);
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.8rem; }
+      .card { width: 90%; }
+    }
+  </style>
+</head>
+<body>
+  <h1>👋 Hi, I’m Shriyansh Sharma</h1>
+  <h2>Developer | ML Enthusiast | Tech Explorer</h2>
+
+  <div class="links">
+    <div class="card">
+      <h3> Machine Learning Project</h3>
+      <p><a href="https://shriyansh-churn-demo.streamlit.app/" target="_blank">Customer Churn Prediction App</a></p>
+    </div>
+
+    <div class="card">
+      <h3>💻 GitHub Profile</h3>
+      <p><a href="https://github.com/notshriyansh" target="_blank">github.com/shriyansh-sharma</a></p>
+    </div>
+  </div>
+
+  <footer>Made with ❤️ &amp; caffeine | © 2025 Shriyansh Sharma</footer>
+</body>
+</html>
