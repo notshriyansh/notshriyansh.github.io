@@ -4,7 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shriyansh Sharma</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="logo.png" />
+  
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
   <style>
     :root {
       --bg: #fafafa;
@@ -16,16 +22,14 @@
       --shadow: rgba(0,0,0,0.05);
     }
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0f172a;
-        --text: #e2e8f0;
-        --muted: #94a3b8;
-        --accent: #38bdf8;
-        --border: #1e293b;
-        --card-bg: #1e293b;
-        --shadow: rgba(0,0,0,0.4);
-      }
+    body.dark {
+      --bg: #0f172a;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --border: #1e293b;
+      --card-bg: #1e293b;
+      --shadow: rgba(0,0,0,0.4);
     }
 
     body {
@@ -33,7 +37,7 @@
       background: var(--bg);
       color: var(--text);
       margin: 0;
-      padding: 80px 20px;
+      padding: 60px 20px;
       text-align: center;
       transition: background 0.3s ease, color 0.3s ease;
     }
@@ -49,34 +53,30 @@
       transition: background 0.3s ease, box-shadow 0.3s ease;
     }
 
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .header img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+
     h1 {
       font-weight: 600;
       font-size: 1.8rem;
-      margin-bottom: 10px;
+      margin: 0;
     }
 
     p {
       font-size: 1rem;
       color: var(--muted);
-      margin: 6px 0 20px;
-    }
-
-    a {
-      display: inline-block;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s ease;
-    }
-
-    a:hover {
-      color: #004dcc;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      a:hover {
-        color: #7dd3fc;
-      }
+      margin: 6px 0 16px;
     }
 
     .links {
@@ -108,20 +108,80 @@
       font-size: 0.8rem;
       color: var(--muted);
     }
+
+    .dark-toggle {
+      margin-top: 20px;
+      padding: 6px 12px;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .dark-toggle:hover {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* Responsive */
+    @media (max-width: 500px) {
+      .container {
+        padding: 20px 15px;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      .link-card {
+        font-size: 0.9rem;
+        padding: 10px 14px;
+      }
+      .header img {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>👋 Hi, I’m Shriyansh Sharma</h1>
+    <div class="header">
+      <img src="logo.png" alt="Logo">
+      <h1>👋 Hi, I’m Shriyansh Sharma</h1>
+    </div>
     <p>Software Developer & ML Enthusiast</p>
     <p>Welcome to my minimal corner on the internet.</p>
 
     <div class="links">
-      <a class="link-card" href="https://github.com/notshriyansh" target="_blank">GitHub</a>
+      <a class="link-card" href="https://github.com/shriyansh-sharma" target="_blank">GitHub</a>
       <a class="link-card" href="https://shriyansh-churn-demo.streamlit.app/" target="_blank">ML Project Demo</a>
     </div>
 
+    <button class="dark-toggle" id="darkModeToggle">Toggle Dark/Light Mode</button>
+
     <footer>© 2025 Shriyansh Sharma</footer>
   </div>
+
+  <script>
+    const toggleBtn = document.getElementById('darkModeToggle');
+    const body = document.body;
+
+    // Check for saved preference
+    if(localStorage.getItem('theme') === 'dark') {
+      body.classList.add('dark');
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      if(body.classList.contains('dark')) {
+        localStorage.setItem('theme', 'dark');
+      } else {
+        localStorage.setItem('theme', 'light');
+      }
+    });
+  </script>
 </body>
 </html>
