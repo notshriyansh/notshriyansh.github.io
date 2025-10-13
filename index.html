@@ -4,79 +4,94 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shriyansh Sharma</title>
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="" />
-  
-  <!-- Google Fonts -->
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/139787987?v=4" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  
   <style>
     :root {
-      --bg: #fafafa;
+      --bg-overlay: rgba(255, 255, 255, 0.3);
       --text: #111;
-      --muted: #555;
+      --muted: #444;
       --accent: #0077ff;
-      --border: #e5e5e5;
-      --card-bg: #fff;
-      --shadow: rgba(0,0,0,0.05);
+      --border: rgba(0, 0, 0, 0.1);
+      --card-bg: rgba(255, 255, 255, 0.2);
+      --shadow: rgba(0,0,0,0.2);
     }
 
-    body.dark {
-      --bg: #0f172a;
+    [data-theme="dark"] {
+      --bg-overlay: rgba(0, 0, 0, 0.45);
       --text: #e2e8f0;
-      --muted: #94a3b8;
+      --muted: #cbd5e1;
       --accent: #38bdf8;
-      --border: #1e293b;
-      --card-bg: #1e293b;
-      --shadow: rgba(0,0,0,0.4);
+      --border: rgba(255, 255, 255, 0.2);
+      --card-bg: rgba(0, 0, 0, 0.45);
+      --shadow: rgba(0,0,0,0.6);
     }
 
     body {
       font-family: "IBM Plex Mono", monospace;
-      background: var(--bg);
       color: var(--text);
       margin: 0;
-      padding: 60px 20px;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       text-align: center;
+      background: url('https://media.istockphoto.com/id/498799866/photo/red-sunset-in-sopelana-beach.jpg?s=612x612&w=0&k=20&c=JrrerGCapCYqJ8MDStBS5RQrJTD9T3MkwSj2x762Yg4=') no-repeat center center/cover;
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 1.4s ease-in-out;
       transition: background 0.3s ease, color 0.3s ease;
     }
 
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--bg-overlay);
+      z-index: 0;
+      transition: background 0.3s ease;
+    }
+
     .container {
+      position: relative;
+      z-index: 1;
       max-width: 700px;
-      margin: 0 auto;
       padding: 40px 30px;
       border: 1px solid var(--border);
       border-radius: 14px;
       background: var(--card-bg);
       box-shadow: 0 2px 8px var(--shadow);
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .header img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
     }
 
     h1 {
       font-weight: 600;
       font-size: 1.8rem;
-      margin: 0;
+      margin-bottom: 10px;
     }
 
     p {
       font-size: 1rem;
       color: var(--muted);
-      margin: 6px 0 16px;
+      margin: 6px 0 20px;
+    }
+
+    a {
+      display: inline-block;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: #004dcc;
+    }
+
+    [data-theme="dark"] a:hover {
+      color: #7dd3fc;
     }
 
     .links {
@@ -94,13 +109,17 @@
       transition: all 0.25s ease;
       font-size: 0.95rem;
       color: var(--text);
-      background: var(--card-bg);
+      background: rgba(255,255,255,0.1);
+    }
+
+    [data-theme="dark"] .link-card {
+      background: rgba(0,0,0,0.3);
     }
 
     .link-card:hover {
       border-color: var(--accent);
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 119, 255, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 119, 255, 0.3);
     }
 
     footer {
@@ -109,76 +128,87 @@
       color: var(--muted);
     }
 
-    .dark-toggle {
-      margin-top: 20px;
-      padding: 6px 12px;
-      cursor: pointer;
-      border: 1px solid var(--border);
+    /* Dark mode toggle button */
+    .toggle-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
       background: var(--card-bg);
-      color: var(--text);
+      border: 1px solid var(--border);
       border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 0.9rem;
+      color: var(--text);
+      cursor: pointer;
       transition: all 0.3s ease;
+      z-index: 2;
+      backdrop-filter: blur(6px);
     }
 
-    .dark-toggle:hover {
+    .toggle-btn:hover {
       border-color: var(--accent);
-      background: var(--accent);
-      color: #fff;
+      transform: scale(1.05);
     }
 
-    /* Responsive */
-    @media (max-width: 500px) {
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
       .container {
-        padding: 20px 15px;
+        margin: 0 16px;
+        padding: 30px 20px;
       }
       h1 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
       }
-      .link-card {
-        font-size: 0.9rem;
-        padding: 10px 14px;
+      .links {
+        flex-direction: column;
+        gap: 12px;
       }
-      .header img {
-        width: 40px;
-        height: 40px;
+      .toggle-btn {
+        top: 15px;
+        right: 15px;
+        padding: 5px 10px;
       }
     }
-
   </style>
 </head>
 <body>
+  <button class="toggle-btn" id="themeToggle"> Light Mode</button>
+
   <div class="container">
-    <div class="header">
-      <img src="logo.png" alt="Logo">
-      <h1> Hi, I’m Shriyansh Sharma</h1>
-    </div>
+    <h1> Hi, I’m Shriyansh Sharma</h1>
     <p>Software Developer & ML Enthusiast</p>
-    <p></p>
 
     <div class="links">
       <a class="link-card" href="https://github.com/notshriyansh" target="_blank">GitHub</a>
       <a class="link-card" href="https://shriyansh-churn-demo.streamlit.app/" target="_blank">ML Project Demo</a>
     </div>
 
-    <button class="dark-toggle" id="darkModeToggle">Toggle Dark/Light Mode</button>
-
     <footer>© 2025 Shriyansh Sharma</footer>
   </div>
 
   <script>
-    const toggleBtn = document.getElementById('darkModeToggle');
-    const body = document.body;
+    const toggleBtn = document.getElementById('themeToggle');
+    const currentTheme = localStorage.getItem('theme');
 
-    if(localStorage.getItem('theme') === 'dark') {
-      body.classList.add('dark');
+    if (currentTheme) {
+      document.documentElement.setAttribute('data-theme', currentTheme);
+      toggleBtn.textContent = currentTheme === 'dark' ? ' Dark Mode' : ' Light Mode';
     }
 
     toggleBtn.addEventListener('click', () => {
-      body.classList.toggle('dark');
-      if(body.classList.contains('dark')) {
-        localStorage.setItem('theme', 'dark');
-      } else {
+      let theme = document.documentElement.getAttribute('data-theme');
+      if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'light');
         localStorage.setItem('theme', 'light');
+        toggleBtn.textContent = ' Light Mode';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        toggleBtn.textContent = ' Dark Mode';
       }
     });
   </script>
