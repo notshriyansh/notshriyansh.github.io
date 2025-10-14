@@ -30,13 +30,14 @@
     * {
       box-sizing: border-box;
       scroll-behavior: smooth;
+      transition: color 0.3s ease, background 0.3s ease, background-color 0.3s ease;
     }
 
     body {
       font-family: "IBM Plex Mono", monospace;
       color: var(--text);
       margin: 0;
-      background: url('https://wallpapercave.com/wp/wp9024945.jpg') no-repeat center center/cover;
+      background: url('https://wallpapercave.com/wp/wp9024977.png') no-repeat center center/cover;
       position: relative;
       overflow-x: hidden;
     }
@@ -224,7 +225,7 @@
   </style>
 </head>
 <body>
-  <button class="toggle-btn" id="themeToggle"> Light Mode</button>
+  <button class="toggle-btn" id="themeToggle">🌞 Light Mode</button>
 
   <section id="hero">
     <h1>Hi, I’m Shriyansh Sharma</h1>
@@ -293,30 +294,23 @@
   <footer>© 2025 Shriyansh Sharma</footer>
 
   <script>
-    // Dark mode toggle
     const toggleBtn = document.getElementById('themeToggle');
-    const currentTheme = localStorage.getItem('theme');
-    if (currentTheme) {
-      document.documentElement.setAttribute('data-theme', currentTheme);
-      toggleBtn.textContent = currentTheme === 'dark' ? ' Dark Mode' : ' Light Mode';
-    }
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+    const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+    toggleBtn.textContent = theme === 'dark' ? '🌙 Dark Mode' : '🌞 Light Mode';
 
     toggleBtn.addEventListener('click', () => {
-      let theme = document.documentElement.getAttribute('data-theme');
-      if (theme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
-        toggleBtn.textContent = ' Light Mode';
-      } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-        toggleBtn.textContent = ' Dark Mode';
-      }
+      let current = document.documentElement.getAttribute('data-theme');
+      let next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      toggleBtn.textContent = next === 'dark' ? '🌙 Dark Mode' : '🌞 Light Mode';
     });
 
-    // Resume button logic
     function openResume() {
-      window.open('', '');
+      window.open('https://drive.google.com/file/d/1z4GxZRVGzBQlJ7q6Dg7nXyAKWfKZ9UO7/view?usp=sharing', '_blank');
     }
   </script>
 </body>
