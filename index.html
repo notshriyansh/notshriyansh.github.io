@@ -27,20 +27,18 @@
       --shadow: rgba(0,0,0,0.6);
     }
 
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: "IBM Plex Mono", monospace;
       color: var(--text);
       margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
       background: url('https://wallpapercave.com/wp/wp9024945.jpg') no-repeat center center/cover;
       position: relative;
-      overflow: hidden;
-      animation: fadeIn 1.4s ease-in-out;
-      transition: background 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
     }
 
     body::before {
@@ -52,85 +50,153 @@
       transition: background 0.3s ease;
     }
 
-    .container {
+    section {
       position: relative;
       z-index: 1;
-      max-width: 700px;
-      padding: 40px 30px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: var(--card-bg);
-      box-shadow: 0 2px 8px var(--shadow);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
+      padding: 80px 20px;
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
     }
 
-    h1 {
+    h1, h2 {
       font-weight: 600;
-      font-size: 1.8rem;
       margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 30px;
+      border-bottom: 1px solid var(--border);
+      display: inline-block;
+      padding-bottom: 6px;
     }
 
     p {
       font-size: 1rem;
       color: var(--muted);
-      margin: 6px 0 20px;
+      line-height: 1.6;
     }
 
-    a {
-      display: inline-block;
+    /* Hero Section */
+    #hero h1 {
+      font-size: 2.2rem;
+    }
+
+    #hero p {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+    }
+
+    /* Projects */
+    .projects {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      width: 280px;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px var(--shadow);
+      transition: all 0.3s ease;
+      text-align: left;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 4px 12px rgba(0, 119, 255, 0.3);
+    }
+
+    .project-card h3 {
+      margin: 0 0 8px;
+    }
+
+    .project-card a {
+      color: var(--accent);
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    /* Skills */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .skill {
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      background: var(--card-bg);
+      transition: transform 0.2s ease;
+    }
+
+    .skill:hover {
+      transform: scale(1.05);
+      border-color: var(--accent);
+    }
+
+    /* Contact */
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .socials a {
       color: var(--accent);
       text-decoration: none;
       font-weight: 500;
       transition: color 0.2s ease;
     }
 
-    a:hover {
+    .socials a:hover {
       color: #004dcc;
     }
 
-    [data-theme="dark"] a:hover {
+    [data-theme="dark"] .socials a:hover {
       color: #7dd3fc;
     }
 
-    .links {
-      margin-top: 24px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
+    .resume-btn {
+      margin-top: 30px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
-    .link-card {
-      border: 1px solid var(--border);
-      padding: 12px 18px;
-      border-radius: 10px;
-      transition: all 0.25s ease;
-      font-size: 0.95rem;
-      color: var(--text);
-      background: rgba(255,255,255,0.1);
-    }
-
-    [data-theme="dark"] .link-card {
-      background: rgba(0,0,0,0.3);
-    }
-
-    .link-card:hover {
-      border-color: var(--accent);
+    .resume-btn:hover {
+      opacity: 0.9;
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 119, 255, 0.3);
     }
 
     footer {
-      margin-top: 40px;
-      font-size: 0.8rem;
+      text-align: center;
+      font-size: 0.85rem;
       color: var(--muted);
+      padding: 20px 0 40px;
     }
 
-    /* Dark mode toggle button */
+    /* Dark mode toggle */
     .toggle-btn {
-      position: absolute;
+      position: fixed;
       top: 20px;
       right: 20px;
       background: var(--card-bg);
@@ -141,7 +207,7 @@
       color: var(--text);
       cursor: pointer;
       transition: all 0.3s ease;
-      z-index: 2;
+      z-index: 3;
       backdrop-filter: blur(6px);
     }
 
@@ -150,50 +216,86 @@
       transform: scale(1.05);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     @media (max-width: 600px) {
-      .container {
-        margin: 0 16px;
-        padding: 30px 20px;
-      }
-      h1 {
-        font-size: 1.4rem;
-      }
-      .links {
-        flex-direction: column;
-        gap: 12px;
-      }
-      .toggle-btn {
-        top: 15px;
-        right: 15px;
-        padding: 5px 10px;
-      }
+      #hero h1 { font-size: 1.6rem; }
+      section { padding: 60px 16px; }
+      .project-card { width: 100%; }
     }
   </style>
 </head>
 <body>
   <button class="toggle-btn" id="themeToggle"> Light Mode</button>
 
-  <div class="container">
-    <h1> Hi, I’m Shriyansh Sharma</h1>
-    <p>Software Developer & ML Enthusiast</p>
+  <section id="hero">
+    <h1>Hi, I’m Shriyansh Sharma</h1>
+    <p>Software Developer & Machine Learning Enthusiast</p>
+  </section>
 
-    <div class="links">
-      <a class="link-card" href="https://github.com/notshriyansh" target="_blank">GitHub</a>
-      <a class="link-card" href="https://shriyansh-churn-demo.streamlit.app/" target="_blank">ML Project Demo</a>
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I’m a passionate developer who loves building elegant and efficient web applications,
+      exploring machine learning and data-driven solutions. Always curious to learn, build, and share ideas.
+    </p>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="project-card">
+        <h3>PayTM Clone</h3>
+        <p>Full-stack app with authentication, peer-to-peer transactions, and balance management using React, Node, and MongoDB.</p>
+        <a href="https://github.com/notshriyansh/paytm" target="_blank">View Project →</a>
+      </div>
+
+      <div class="project-card">
+        <h3>ML Churn Predictor</h3>
+        <p>Streamlit-based AI app for predicting customer churn using Gradient Boosting and data preprocessing pipelines.</p>
+        <a href="https://shriyansh-churn-demo.streamlit.app/" target="_blank">Live Demo →</a>
+      </div>
+
+      <div class="project-card">
+        <h3>Event Ticketing Platform</h3>
+        <p>Spring Boot + React platform for event management with QR ticket validation and analytics dashboard.</p>
+        <a href="https://github.com/notshriyansh/tickets" target="_blank">GitHub →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div class="skill">React.js</div>
+      <div class="skill">Node.js</div>
+      <div class="skill">Express.js</div>
+      <div class="skill">MongoDB</div>
+      <div class="skill">Python</div>
+      <div class="skill">Machine Learning</div>
+      <div class="skill">C++</div>
+      <div class="skill">Spring Boot</div>
+      <div class="skill">SQL</div>
+      <div class="skill">Git & GitHub</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Connect with Me</h2>
+    <div class="socials">
+      <a href="https://github.com/notshriyansh" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/shriyansh-sharma-448b8224b/" target="_blank">LinkedIn</a>
+      <a href="mailto:shriyansh707@gmail.com" target="_blank">Email</a>
     </div>
 
-    <footer>© 2025 Shriyansh Sharma</footer>
-  </div>
+    <!-- Resume Button -->
+    <button class="resume-btn" onclick="openResume()">📄 View My Resume</button>
+  </section>
+
+  <footer>© 2025 Shriyansh Sharma</footer>
 
   <script>
+    // Dark mode toggle
     const toggleBtn = document.getElementById('themeToggle');
     const currentTheme = localStorage.getItem('theme');
-
     if (currentTheme) {
       document.documentElement.setAttribute('data-theme', currentTheme);
       toggleBtn.textContent = currentTheme === 'dark' ? ' Dark Mode' : ' Light Mode';
@@ -211,6 +313,11 @@
         toggleBtn.textContent = ' Dark Mode';
       }
     });
+
+    // Resume button logic
+    function openResume() {
+      window.open('', '');
+    }
   </script>
 </body>
 </html>
