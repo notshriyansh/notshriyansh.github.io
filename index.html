@@ -3,319 +3,337 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shriyansh Sharma</title>
-  <link rel="icon" href="https://avatars.githubusercontent.com/u/137698358?v=4&size=64" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>~/shriyansh</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap');
+
     :root {
-      --bg-overlay: rgba(255, 255, 255, 0.3);
-      --text: #111;
-      --muted: #444;
-      --accent: #0077ff;
-      --border: rgba(0, 0, 0, 0.1);
-      --card-bg: rgba(255, 255, 255, 0.2);
-      --shadow: rgba(0,0,0,0.2);
+      --bg-primary: #0d0d0d;
+      --bg-secondary: #1a1a1a;
+      --text-primary: #e5e5e5;
+      --text-secondary: #a0a0a0;
+      --accent-pink: #38bdf8;
+      --accent-pink-hover: #7dd3fc;
+      --border-color: #2a2a2a;
+      --shadow-color: rgba(56, 189, 248, 0.1);
+      --gradient-start: rgba(64, 64, 64, 0.1);
+      --gradient-end: rgba(32, 32, 32, 0.1);
     }
 
-    [data-theme="dark"] {
-      --bg-overlay: rgba(0, 0, 0, 0.45);
-      --text: #e2e8f0;
-      --muted: #cbd5e1;
-      --accent: #38bdf8;
-      --border: rgba(255, 255, 255, 0.2);
-      --card-bg: rgba(0, 0, 0, 0.45);
-      --shadow: rgba(0,0,0,0.6);
+    ::selection {
+      background-color: var(--accent-pink);
+      color: var(--bg-primary);
     }
 
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
+      transition-property: transform, background-color, border-color, color, opacity, box-shadow;
+      transition-duration: 0.2s;
+      transition-timing-function: ease;
+    }
+
+    html {
       scroll-behavior: smooth;
-      transition: color 0.3s ease, background 0.3s ease, background-color 0.3s ease;
     }
 
     body {
-      font-family: "IBM Plex Mono", monospace;
-      color: var(--text);
-      margin: 0;
-      background: url('https://wallpapercave.com/wp/wp9024977.png') no-repeat center center/cover;
-      position: relative;
+      font-family: 'IBM Plex Mono', monospace;
+      background: var(--bg-primary);
+      background-image: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: var(--text-primary);
+      line-height: 1.6;
+      font-size: 16px;
+      font-weight: 400;
       overflow-x: hidden;
     }
 
-    body::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: var(--bg-overlay);
-      z-index: 0;
-      transition: background 0.3s ease;
+    /* Scroll Progress */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 3px;
+      background: var(--border-color);
+      z-index: 1000;
+    }
+
+    .scroll-progress-fill {
+      height: 0%;
+      width: 100%;
+      background: linear-gradient(to bottom, var(--accent-pink), var(--border-color));
+      transition: height 0.1s ease;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0;
+      padding: 60px 40px 60px 120px;
+      min-height: 100vh;
     }
 
     section {
-      position: relative;
-      z-index: 1;
-      padding: 80px 20px;
-      max-width: 1000px;
-      margin: auto;
-      text-align: center;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: fadeInLeft 0.8s ease forwards;
     }
 
-    h1, h2 {
-      font-weight: 600;
-      margin-bottom: 10px;
+    @keyframes fadeInLeft {
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    h1 {
+      font-size: 2.3rem;
+      font-weight: 500;
+      color: var(--accent-pink);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
     }
 
     h2 {
-      font-size: 1.4rem;
-      margin-bottom: 30px;
-      border-bottom: 1px solid var(--border);
-      display: inline-block;
-      padding-bottom: 6px;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--accent-pink);
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
     }
 
-    .highlight-text {
-      color: var(--text);
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 8px;
     }
 
     p {
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      max-width: 600px;
       font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.6;
     }
 
-    /* Hero Section */
-    #hero h1 {
-      font-size: 2.2rem;
-    }
-
-    #hero p {
-      font-size: 1.1rem;
-      margin-bottom: 25px;
-    }
-
-    /* Projects */
-    .projects {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-    }
-
-    .project-card {
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 20px;
-      width: 280px;
-      background: var(--card-bg);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 8px var(--shadow);
-      transition: all 0.3s ease;
-      text-align: left;
-    }
-
-    .project-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent);
-      box-shadow: 0 4px 12px rgba(0, 119, 255, 0.3);
-    }
-
-    .project-card h3 {
-      margin: 0 0 8px;
-    }
-
-    .project-card a {
-      color: var(--accent);
-      font-size: 0.9rem;
+    a {
+      color: var(--accent-pink);
       text-decoration: none;
+      transition: all 0.2s ease;
     }
 
-    /* Skills */
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-    }
-
-    .skill {
-      border: 1px solid var(--border);
-      padding: 8px 16px;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      background: var(--card-bg);
-      transition: transform 0.2s ease;
-    }
-
-    .skill:hover {
-      transform: scale(1.05);
-      border-color: var(--accent);
-    }
-
-    /* Contact */
-    .socials {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 20px;
-      flex-wrap: wrap;
-    }
-
-    .socials a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s ease;
-    }
-
-    .socials a:hover {
-      color: #004dcc;
-    }
-
-    [data-theme="dark"] .socials a:hover {
-      color: #7dd3fc;
-    }
+    a:hover { color: var(--accent-pink-hover); }
 
     .resume-btn {
-      margin-top: 30px;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
+      display: inline-block;
+      padding: 12px 24px;
+      background: transparent;
+      border: 1px solid var(--accent-pink);
+      color: var(--accent-pink);
       font-family: inherit;
+      font-size: 0.9rem;
       cursor: pointer;
       transition: all 0.3s ease;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
     }
 
     .resume-btn:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
+      color: var(--text-primary);
+      transform: skew(-5deg);
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .projects-grid {
+      display: grid;
+      gap: 24px;
+      margin-top: 16px;
+    }
+
+    .project-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      padding: 24px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-pink);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+
+    .project-title {
+      color: var(--text-primary);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .project-description {
+      color: var(--text-secondary);
+      margin: 12px 0;
+      font-size: 1rem;
+    }
+
+    .project-tech {
+      color: var(--accent-pink);
+      font-size: 0.8rem;
+      font-weight: 300;
+      margin-top: 8px;
+    }
+
+    .project-link {
+      font-size: 0.9rem;
+      color: var(--accent-pink);
+      position: absolute;
+      right: 24px;
+      bottom: 24px;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .skill {
+      border: 1px solid var(--border-color);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .contact-link {
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .contact-link:hover { color: var(--accent-pink); }
+
+    .contact-prefix {
+      color: var(--accent-pink);
+      opacity: 0.6;
+      width: 80px;
+      flex-shrink: 0;
     }
 
     footer {
       text-align: center;
-      font-size: 0.85rem;
-      color: var(--muted);
-      padding: 20px 0 40px;
-    }
-
-    /* Dark mode toggle */
-    .toggle-btn {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 6px 12px;
+      padding: 40px 0;
+      color: var(--text-secondary);
       font-size: 0.9rem;
-      color: var(--text);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      z-index: 3;
-      backdrop-filter: blur(6px);
-    }
-
-    .toggle-btn:hover {
-      border-color: var(--accent);
-      transform: scale(1.05);
-    }
-
-    @media (max-width: 600px) {
-      #hero h1 { font-size: 1.6rem; }
-      section { padding: 60px 16px; }
-      .project-card { width: 100%; }
     }
   </style>
 </head>
 <body>
-  <button class="toggle-btn" id="themeToggle">🌞 Light Mode</button>
+  <div class="scroll-progress"><div class="scroll-progress-fill" id="scrollProgress"></div></div>
 
-  <section id="hero">
-    <h1>Hi, I’m Shriyansh Sharma</h1>
-    <p class="highlight-text">Software Developer & Machine Learning Enthusiast</p>
-  </section>
+  <div class="container">
+    <!-- Intro -->
+    <section>
+      <h1>Shriyansh Sharma</h1>
+      <p>Software Developer & Machine Learning Enthusiast — building intelligent systems and modern web applications.</p>
+    </section>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p class="highlight-text">
-      I’m a passionate developer who loves building elegant and efficient web applications,
-      exploring machine learning and data-driven solutions. Always curious to learn, build, and share ideas.
-    </p>
-  </section>
+    <!-- Resume -->
+    <section>
+      <a href="" target="_blank" class="resume-btn">View My Resume</a>
+    </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="projects">
-      <div class="project-card">
-        <h3>PayTM Clone</h3>
-        <p>Full-stack app with authentication, peer-to-peer transactions, and balance management using React, Node, and MongoDB.</p>
-        <a href="https://github.com/notshriyansh/paytm" target="_blank">View Project →</a>
+    <!-- Projects -->
+    <section>
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-title">PayTM Clone</div>
+          <div class="project-description">
+            Full-stack app with authentication, peer-to-peer transactions, and balance management using React, Node, and MongoDB.
+          </div>
+          <div class="project-tech">React • Node.js • Express • MongoDB</div>
+          <a href="https://github.com/notshriyansh/paytm" target="_blank" class="project-link">GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-title">ML Churn Predictor</div>
+          <div class="project-description">
+            Streamlit-based AI app for predicting customer churn using Gradient Boosting and data preprocessing pipelines.
+          </div>
+          <div class="project-tech">Python • Streamlit • Machine Learning</div>
+          <a href="https://shriyansh-churn-demo.streamlit.app/" target="_blank" class="project-link">Live Demo →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-title">Event Ticketing Platform</div>
+          <div class="project-description">
+            Spring Boot + React platform for event management with QR ticket validation and analytics dashboard.
+          </div>
+          <div class="project-tech">Spring Boot • React • MySQL</div>
+          <a href="https://github.com/notshriyansh/tickets" target="_blank" class="project-link">GitHub →</a>
+        </div>
       </div>
+    </section>
 
-      <div class="project-card">
-        <h3>ML Churn Predictor</h3>
-        <p>Streamlit-based AI app for predicting customer churn using Gradient Boosting and data preprocessing pipelines.</p>
-        <a href="https://shriyansh-churn-demo.streamlit.app/" target="_blank">Live Demo →</a>
+    <!-- Skills -->
+    <section>
+      <h2>Skills</h2>
+      <div class="skills">
+        <div class="skill">React.js</div>
+        <div class="skill">Node.js</div>
+        <div class="skill">Express.js</div>
+        <div class="skill">MongoDB</div>
+        <div class="skill">Python</div>
+        <div class="skill">Machine Learning</div>
+        <div class="skill">C++</div>
+        <div class="skill">Spring Boot</div>
+        <div class="skill">SQL</div>
+        <div class="skill">Git & GitHub</div>
       </div>
+    </section>
 
-      <div class="project-card">
-        <h3>Event Ticketing Platform</h3>
-        <p>Spring Boot + React platform for event management with QR ticket validation and analytics dashboard.</p>
-        <a href="https://github.com/notshriyansh/tickets" target="_blank">GitHub →</a>
+    <!-- Contact -->
+    <section>
+      <h2>Contact</h2>
+      <div class="contact-links">
+        <a href="mailto:shriyansh707@gmail.com" class="contact-link">
+          <span class="contact-prefix">Email:</span> shriyansh707@gmail.com
+        </a>
+        <a href="https://github.com/notshriyansh" target="_blank" class="contact-link">
+          <span class="contact-prefix">GitHub:</span> @notshriyansh
+        </a>
+        <a href="https://www.linkedin.com/in/shriyansh-sharma-448b8224b/" target="_blank" class="contact-link">
+          <span class="contact-prefix">LinkedIn:</span> Shriyansh Sharma
+        </a>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
-  <section id="skills">
-    <h2>Skills</h2>
-    <div class="skills">
-      <div class="skill">React.js</div>
-      <div class="skill">Node.js</div>
-      <div class="skill">Express.js</div>
-      <div class="skill">MongoDB</div>
-      <div class="skill">Python</div>
-      <div class="skill">Machine Learning</div>
-      <div class="skill">C++</div>
-      <div class="skill">Spring Boot</div>
-      <div class="skill">SQL</div>
-      <div class="skill">Git & GitHub</div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <h2>Connect with Me</h2>
-    <div class="socials">
-      <a href="https://github.com/notshriyansh" target="_blank">GitHub</a>
-      <a href="https://www.linkedin.com/in/shriyansh-sharma-448b8224b/" target="_blank">LinkedIn</a>
-      <a href="mailto:shriyansh707@gmail.com" target="_blank">Email</a>
-    </div>
-
-    <!-- Resume Button -->
-    <button class="resume-btn" onclick="openResume()">📄 View My Resume</button>
-  </section>
-
-  <footer>© 2025 Shriyansh Sharma</footer>
+  <footer>
+    <p>© 2025 Shriyansh Sharma — Built with HTML, CSS, and curiosity.</p>
+  </footer>
 
   <script>
-    const toggleBtn = document.getElementById('themeToggle');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const savedTheme = localStorage.getItem('theme');
-    const theme = savedTheme || (prefersDark ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme', theme);
-    toggleBtn.textContent = theme === 'dark' ? '🌙 Dark Mode' : '🌞 Light Mode';
-
-    toggleBtn.addEventListener('click', () => {
-      let current = document.documentElement.getAttribute('data-theme');
-      let next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      toggleBtn.textContent = next === 'dark' ? '🌙 Dark Mode' : '🌞 Light Mode';
-    });
-
-    function openResume() {
-      window.open('https://drive.google.com/file/d/1z4GxZRVGzBQlJ7q6Dg7nXyAKWfKZ9UO7/view?usp=sharing', '_blank');
+    // Scroll progress indicator
+    function updateScrollProgress() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (scrollTop / scrollHeight) * 100;
+      document.getElementById('scrollProgress').style.height = progress + '%';
     }
+    window.addEventListener('scroll', updateScrollProgress);
+    window.addEventListener('load', updateScrollProgress);
   </script>
 </body>
 </html>
