@@ -28,6 +28,7 @@ body {
   margin: auto;
   padding: 40px 20px;
   position: relative;
+  z-index: 2;
 }
 
 header {
@@ -126,15 +127,43 @@ footer {
   margin-top: 40px;
 }
 
-/* Lorenz background */
+/* 🌀 Attractor Background */
 .lorenz-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 0;
   overflow: hidden;
+}
+
+#lorenzCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 🎛️ Dropdown */
+#attractorControls {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: "IBM Plex Mono", monospace;
+}
+
+#attractorControls select {
+  background: transparent;
+  color: white;
+  border: 1px solid white;
+  border-radius: 6px;
+  padding: 3px 6px;
 }
 
 .resume-btn {
