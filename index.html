@@ -1,339 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>~/shriyansh</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap');
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>shriyansh sharma</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="icon"
+      href="https://avatars.githubusercontent.com/u/137698358?v=4&size=64"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-    :root {
-      --bg-primary: #0d0d0d;
-      --bg-secondary: #1a1a1a;
-      --text-primary: #e5e5e5;
-      --text-secondary: #a0a0a0;
-      --accent-pink: #38bdf8;
-      --accent-pink-hover: #7dd3fc;
-      --border-color: #2a2a2a;
-      --shadow-color: rgba(56, 189, 248, 0.1);
-      --gradient-start: rgba(64, 64, 64, 0.1);
-      --gradient-end: rgba(32, 32, 32, 0.1);
-    }
+  <body>
+    <div class="container">
+      <header>
+        <h1 class="site-title">Shriyansh Sharma</h1>
+        <nav>
+          <a href="#about" class="nav-link active">About</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a
+            href="https://github.com/notshriyansh"
+            target="_blank"
+            class="nav-link"
+            >GitHub</a
+          >
+          <a href="mailto:shriyansh707@gmail.com" class="nav-link">Contact</a>
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            aria-label="Toggle theme"
+          >
+            🌙
+          </button>
+        </nav>
+      </header>
 
-    ::selection {
-      background-color: var(--accent-pink);
-      color: var(--bg-primary);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      transition-property: transform, background-color, border-color, color, opacity, box-shadow;
-      transition-duration: 0.2s;
-      transition-timing-function: ease;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'IBM Plex Mono', monospace;
-      background: var(--bg-primary);
-      background-image: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-      color: var(--text-primary);
-      line-height: 1.6;
-      font-size: 16px;
-      font-weight: 400;
-      overflow-x: hidden;
-    }
-
-    /* Scroll Progress */
-    .scroll-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      width: 3px;
-      background: var(--border-color);
-      z-index: 1000;
-    }
-
-    .scroll-progress-fill {
-      height: 0%;
-      width: 100%;
-      background: linear-gradient(to bottom, var(--accent-pink), var(--border-color));
-      transition: height 0.1s ease;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 0;
-      padding: 60px 40px 60px 120px;
-      min-height: 100vh;
-    }
-
-    section {
-      margin-bottom: 40px;
-      opacity: 0;
-      transform: translateX(-20px);
-      animation: fadeInLeft 0.8s ease forwards;
-    }
-
-    @keyframes fadeInLeft {
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    h1 {
-      font-size: 2.3rem;
-      font-weight: 500;
-      color: var(--accent-pink);
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      font-weight: 400;
-      color: var(--accent-pink);
-      margin-bottom: 16px;
-      letter-spacing: 0.02em;
-    }
-
-    h3 {
-      font-size: 1.1rem;
-      font-weight: 500;
-      color: var(--text-primary);
-      margin-bottom: 8px;
-    }
-
-    p {
-      color: var(--text-secondary);
-      margin-bottom: 16px;
-      max-width: 600px;
-      font-size: 1rem;
-    }
-
-    a {
-      color: var(--accent-pink);
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    a:hover { color: var(--accent-pink-hover); }
-
-    .resume-btn {
-      display: inline-block;
-      padding: 12px 24px;
-      background: transparent;
-      border: 1px solid var(--accent-pink);
-      color: var(--accent-pink);
-      font-family: inherit;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-bottom: 24px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .resume-btn:hover {
-      color: var(--text-primary);
-      transform: skew(-5deg);
-      box-shadow: 0 4px 12px var(--shadow-color);
-    }
-
-    .projects-grid {
-      display: grid;
-      gap: 24px;
-      margin-top: 16px;
-    }
-
-    .project-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      padding: 24px;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--accent-pink);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-    }
-
-    .project-title {
-      color: var(--text-primary);
-      font-weight: 500;
-      margin-bottom: 8px;
-    }
-
-    .project-description {
-      color: var(--text-secondary);
-      margin: 12px 0;
-      font-size: 1rem;
-    }
-
-    .project-tech {
-      color: var(--accent-pink);
-      font-size: 0.8rem;
-      font-weight: 300;
-      margin-top: 8px;
-    }
-
-    .project-link {
-      font-size: 0.9rem;
-      color: var(--accent-pink);
-      position: absolute;
-      right: 24px;
-      bottom: 24px;
-    }
-
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .skill {
-      border: 1px solid var(--border-color);
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-    }
-
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-top: 24px;
-    }
-
-    .contact-link {
-      color: var(--text-secondary);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .contact-link:hover { color: var(--accent-pink); }
-
-    .contact-prefix {
-      color: var(--accent-pink);
-      opacity: 0.6;
-      width: 80px;
-      flex-shrink: 0;
-    }
-
-    footer {
-      text-align: center;
-      padding: 40px 0;
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-    }
-  </style>
-</head>
-<body>
-  <div class="scroll-progress"><div class="scroll-progress-fill" id="scrollProgress"></div></div>
-
-  <div class="container">
-    <!-- Intro -->
-    <section>
-      <h1>Shriyansh Sharma</h1>
-      <p>Software Developer & Machine Learning Enthusiast — building intelligent systems and modern web applications.</p>
-    </section>
-
-    <!-- Resume -->
-    <section>
-      <a href="" target="_blank" class="resume-btn">View My Resume</a>
-    </section>
-
-    <!-- Projects -->
-    <section>
-      <h2>Projects</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <div class="project-title">PayTM Clone</div>
-          <div class="project-description">
-            Full-stack app with authentication, peer-to-peer transactions, and balance management using React, Node, and MongoDB.
-          </div>
-          <div class="project-tech">React • Node.js • Express • MongoDB</div>
-          <a href="https://github.com/notshriyansh/paytm" target="_blank" class="project-link">GitHub →</a>
+      <main>
+        <div class="lorenz-container">
+          <canvas id="lorenzCanvas"></canvas>
         </div>
 
-        <div class="project-card">
-          <div class="project-title">ML Churn Predictor</div>
-          <div class="project-description">
-            Streamlit-based AI app for predicting customer churn using Gradient Boosting and data preprocessing pipelines.
+        <section id="about" class="section">
+          <h2>hi, i'm shriyansh sharma</h2>
+          <p>
+            i'm a <strong>Software Developer</strong> and
+            <strong>ML Enthusiast</strong> passionate about building practical,
+            elegant, and high-impact digital products. Currently, I’m sharpening
+            my core dev skills through community projects and learning advanced
+            systems concepts.
+          </p>
+          <button class="resume-btn" onclick="openResume()">
+            📄 View Resume
+          </button>
+        </section>
+
+        <section id="projects" class="section">
+          <h2>featured projects</h2>
+          <div class="project-grid">
+            <div class="project-card">
+              <h3>Event Ticketing Platform</h3>
+              <p>
+                Full-stack app built with Spring Boot & React for event
+                creation, ticket sales, and QR-based validation.
+              </p>
+            </div>
+            <div class="project-card">
+              <h3>PayTM Clone</h3>
+              <p>
+                Peer-to-peer transaction system with JWT authentication,
+                MongoDB, and Tailwind frontend.
+              </p>
+            </div>
+            <div class="project-card">
+              <h3>ML Churn Demo</h3>
+              <p>
+                <a
+                  href="https://shriyansh-churn-demo.streamlit.app/"
+                  target="_blank"
+                  >Live Demo</a
+                >
+                — Streamlit app predicting customer churn using logistic
+                regression and feature engineering.
+              </p>
+            </div>
           </div>
-          <div class="project-tech">Python • Streamlit • Machine Learning</div>
-          <a href="https://shriyansh-churn-demo.streamlit.app/" target="_blank" class="project-link">Live Demo →</a>
-        </div>
+        </section>
 
-        <div class="project-card">
-          <div class="project-title">Event Ticketing Platform</div>
-          <div class="project-description">
-            Spring Boot + React platform for event management with QR ticket validation and analytics dashboard.
+        <section id="skills" class="section">
+          <h2>💡 Skills</h2>
+          <div class="skills-list">
+            <span>JavaScript</span>
+            <span>React.js</span>
+            <span>Node.js</span>
+            <span>Python</span>
+            <span>Machine Learning</span>
+            <span>SQL</span>
+            <span>Spring Boot</span>
+            <span>Git & GitHub</span>
           </div>
-          <div class="project-tech">Spring Boot • React • MySQL</div>
-          <a href="https://github.com/notshriyansh/tickets" target="_blank" class="project-link">GitHub →</a>
-        </div>
-      </div>
-    </section>
+        </section>
+      </main>
 
-    <!-- Skills -->
-    <section>
-      <h2>Skills</h2>
-      <div class="skills">
-        <div class="skill">React.js</div>
-        <div class="skill">Node.js</div>
-        <div class="skill">Express.js</div>
-        <div class="skill">MongoDB</div>
-        <div class="skill">Python</div>
-        <div class="skill">Machine Learning</div>
-        <div class="skill">C++</div>
-        <div class="skill">Spring Boot</div>
-        <div class="skill">SQL</div>
-        <div class="skill">Git & GitHub</div>
-      </div>
-    </section>
+      <footer>
+        <p>
+          © 2025 Shriyansh Sharma ·
+          <a href="https://github.com/notshriyansh" target="_blank">GitHub</a>
+        </p>
+      </footer>
+    </div>
 
-    <!-- Contact -->
-    <section>
-      <h2>Contact</h2>
-      <div class="contact-links">
-        <a href="mailto:shriyansh707@gmail.com" class="contact-link">
-          <span class="contact-prefix">Email:</span> shriyansh707@gmail.com
-        </a>
-        <a href="https://github.com/notshriyansh" target="_blank" class="contact-link">
-          <span class="contact-prefix">GitHub:</span> @notshriyansh
-        </a>
-        <a href="https://www.linkedin.com/in/shriyansh-sharma-448b8224b/" target="_blank" class="contact-link">
-          <span class="contact-prefix">LinkedIn:</span> Shriyansh Sharma
-        </a>
-      </div>
-    </section>
-  </div>
-
-  <footer>
-    <p>© 2025 Shriyansh Sharma — Built with HTML, CSS, and curiosity.</p>
-  </footer>
-
-  <script>
-    // Scroll progress indicator
-    function updateScrollProgress() {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (scrollTop / scrollHeight) * 100;
-      document.getElementById('scrollProgress').style.height = progress + '%';
-    }
-    window.addEventListener('scroll', updateScrollProgress);
-    window.addEventListener('load', updateScrollProgress);
-  </script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
