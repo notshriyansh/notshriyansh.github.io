@@ -1,4 +1,4 @@
-// 🌙 Theme toggle
+
 const themeToggle = document.getElementById("themeToggle");
 const body = document.body;
 const currentTheme = localStorage.getItem("theme") || "light";
@@ -12,45 +12,63 @@ themeToggle.addEventListener("click", () => {
   );
 });
 
-// 📄 Resume open
 function openResume() {
   window.open("resume.pdf", "_blank");
 }
 
-// 🌀 Lorenz Attractor background
-class LorenzAttractor {
-  constructor(canvas) {
+class Attractor {
+  constructor(canvas, type = "lorenz") {
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
-    this.sigma = 10.0;
-    this.rho = 28.0;
-    this.beta = 8.0 / 3.0;
+    this.type = type;
     this.dt = 0.01;
-    this.attractors = [
+    this.reset();
+    this.resize();
+    window.addEventListener("resize", () => this.resize());
+    this.animate();
+  }
+
+  reset() {
+    this.particles = [
       { x: 1, y: 1, z: 1, color: "#00FFFF", trail: [] },
       { x: 2, y: 1, z: 1, color: "#FF00FF", trail: [] },
       { x: 1, y: 2, z: 1, color: "#FFFF00", trail: [] },
     ];
-    this.setupCanvas();
-    this.animate();
   }
 
-  setupCanvas() {
+  resize() {
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
-    this.ctx.globalAlpha = 0.5;
-    window.addEventListener("resize", () => this.setupCanvas());
   }
 
-  lorenz(x, y, z) {
-    const dx = this.sigma * (y - x) * this.dt;
-    const dy = (x * (this.rho - z) - y) * this.dt;
-    const dz = (x * y - this.beta * z) * this.dt;
-    return [dx, dy, dz];
+  step(x, y, z) {
+    switch (this.type) {
+      case "rossler":
+        const a = 0.2, b = 0.2, c = 5.7;
+        return [
+          x + (-y - z) * this.dt,
+          y + (x + a * y) * this.dt,
+          z + (b + z * (x - c)) * this.dt,
+        ];
+      case "thomas":
+        const beta = 0.19;
+        return [
+          x + (Math.sin(y) - beta * x) * this.dt,
+          y + (Math.sin(z) - beta * y) * this.dt,
+          z + (Math.sin(x) - beta * z) * this.dt,
+        ];
+      default:
+        const sigma = 10, rho = 28, betaL = 8 / 3;
+        return [
+          x + sigma * (y - x) * this.dt,
+          y + (x * (rho - z) - y) * this.dt,
+          z + (x * y - betaL * z) * this.dt,
+        ];
+    }
   }
 
-  drawTrail(attractor) {
-    const { trail, color } = attractor;
+  drawTrail(p) {
+    const { trail, color } = p;
     if (trail.length < 2) return;
     this.ctx.beginPath();
     this.ctx.strokeStyle = color;
@@ -62,23 +80,37 @@ class LorenzAttractor {
   }
 
   animate() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.attractors.forEach((a) => {
-      const [dx, dy, dz] = this.lorenz(a.x, a.y, a.z);
-      a.x += dx;
-      a.y += dy;
-      a.z += dz;
-      const x2d = this.canvas.width / 2 + a.x * 10;
-      const y2d = this.canvas.height / 2 - (a.z - 15) * 10;
-      a.trail.push([x2d, y2d]);
-      if (a.trail.length > 200) a.trail.shift();
-      this.drawTrail(a);
+    this.ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+    this.particles.forEach((p) => {
+      const [dx, dy, dz] = this.step(p.x, p.y, p.z);
+      p.x = dx;
+      p.y = dy;
+      p.z = dz;
+      const scale = 10;
+      const x2d = this.canvas.width / 2 + p.x * scale;
+      const y2d = this.canvas.height / 2 - (p.z - 15) * scale;
+      p.trail.push([x2d, y2d]);
+      if (p.trail.length > 200) p.trail.shift();
+      this.drawTrail(p);
     });
+
     requestAnimationFrame(() => this.animate());
+  }
+
+  changeType(type) {
+    this.type = type;
+    this.reset();
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("lorenzCanvas");
-  new LorenzAttractor(canvas);
+  const attractor = new Attractor(canvas);
+  const select = document.getElementById("attractorSelect");
+
+  select.addEventListener("change", (e) => {
+    attractor.changeType(e.target.value);
+  });
 });
