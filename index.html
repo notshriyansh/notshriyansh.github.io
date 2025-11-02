@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>shriyansh sharma</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="icon"
+      href="https://avatars.githubusercontent.com/u/137698358?v=4&size=64"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <h1 class="site-title">shriyansh</h1>
+        <nav>
+          <a href="index.html" class="nav-link active">home</a>
+          <a href="projects.html" class="nav-link">projects</a>
+          <a href="blog.html" class="nav-link">blog</a>
+          <a href="mailto:shriyansh707@gmail.com" class="nav-link">contact</a>
+          <a
+            href="https://github.com/notshriyansh"
+            class="nav-link"
+            target="_blank"
+            >github</a
+          >
+          <a href="https://x.com/notshriyansh" class="nav-link" target="_blank"
+            >x</a
+          >
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            aria-label="Toggle theme"
+          >
+            <svg
+              class="theme-icon sun-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="12" r="5" />
+              <path
+                d="M12 1v6m0 6v6m8.66-7H15m-6 0H3m15.66 7.66l-4.24-4.24m-4.24 0L5.34 4.34m13.32 15.32l-4.24-4.24m-4.24 0L5.34 19.66"
+              />
+            </svg>
+            <svg
+              class="theme-icon moon-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </button>
+        </nav>
+      </header>
+
+      <main>
+        <div class="lorenz-container">
+          <canvas id="lorenzCanvas"></canvas>
+        </div>
+
+        <h2 class="greeting">hi, i'm shriyansh 👋</h2>
+
+        <div class="bio">
+          <p>glad you dropped by.</p>
+
+          <p>
+            i’m a <strong>software developer</strong> and
+            <strong>ml enthusiast</strong> passionate about building practical,
+            elegant, and high-impact digital products.
+          </p>
+
+          <p>
+            i enjoy working on full-stack applications and have built things
+            like a
+            <strong>Spring Boot + React event ticketing system</strong>, a
+            <strong>PayTM clone</strong>, and various ML demos — from
+            <strong>churn prediction</strong> to <strong>vision models</strong>.
+          </p>
+
+          <p>
+            currently, i’m learning advanced systems concepts, strengthening my
+            dev fundamentals, and contributing to open-source projects.
+          </p>
+
+          <p>
+            you can find my work on
+            <a href="https://github.com/notshriyansh" target="_blank">GitHub</a>
+            or connect with me on
+            <a href="https://x.com/" target="_blank">X</a>.
+          </p>
+        </div>
+      </main>
+    </div>
+
+    <script src="lorenz.js"></script>
+
+    <script>
+      (function () {
+        const themeToggle = document.getElementById("themeToggle");
+        const body = document.body;
+
+        const currentTheme = localStorage.getItem("theme") || "light";
+        if (currentTheme === "dark") body.classList.add("dark-mode");
+
+        themeToggle.addEventListener("click", () => {
+          body.classList.toggle("dark-mode");
+          const theme = body.classList.contains("dark-mode") ? "dark" : "light";
+          localStorage.setItem("theme", theme);
+        });
+      })();
+    </script>
+  </body>
+</html>
