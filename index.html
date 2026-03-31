@@ -14,17 +14,30 @@
   </head>
 
   <body>
-    <div class="terminal-container">
-      <div class="terminal-output" id="output"></div>
+    <div class="page">
+      <div class="terminal-window">
+        <!-- Header -->
+        <div class="terminal-header">
+          <div class="dot red"></div>
+          <div class="dot yellow"></div>
+          <div class="dot green"></div>
+          <div class="title">gnome-terminal</div>
+        </div>
 
-      <div class="terminal-input-line">
-        <span class="prompt">shriyansh@portfolio:~$</span>
-        <input
-          type="text"
-          id="commandInput"
-          autofocus
-          autocomplete="off"
-        />
+        <!-- Body -->
+        <div class="terminal-body">
+          <div class="terminal-output" id="output"></div>
+
+          <div class="terminal-input-line">
+            <span class="prompt">= ~ →</span>
+            <input
+              type="text"
+              id="commandInput"
+              autofocus
+              autocomplete="off"
+            />
+          </div>
+        </div>
       </div>
     </div>
 
@@ -130,7 +143,7 @@ resume:
         if (!inputText) return;
 
         appendOutput(
-          `<span class="prompt">shriyansh@portfolio:~$</span> ${inputText}`
+          `<span class="prompt">= ~ →</span> ${inputText}`
         );
 
         const [cmd, ...args] = inputText.toLowerCase().split(" ");
@@ -146,7 +159,6 @@ resume:
       input.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
           const command = input.value.trim();
-
           if (!command) return;
 
           history.push(command);
@@ -176,7 +188,7 @@ resume:
       window.addEventListener("click", () => input.focus());
 
       appendOutput(`
-welcome to shriyansh.sh
+devlogs-style terminal portfolio
 
 type 'help' to explore.
       `);
