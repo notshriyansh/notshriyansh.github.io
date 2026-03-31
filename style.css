@@ -1,9 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&display=swap");
 
 :root {
-  --bg: #0d1117;
+  --bg: #0b0f14;
+  --terminal-bg: #0d1117;
   --text: #c9d1d9;
-  --accent: #00ff90;
+  --accent: #f7a041;
+  --green: #3fb950;
+  --border: #30363d;
   --link: #58a6ff;
 }
 
@@ -13,18 +16,61 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: "IBM Plex Mono", monospace;
-  overflow-x: hidden;
 }
 
-.terminal-container {
-  max-width: 900px;
+.page {
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 3rem 1.5rem;
+}
+
+.terminal-window {
+  background: var(--terminal-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: #0b0f14;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.red {
+  background: #ff5f56;
+}
+.yellow {
+  background: #ffbd2e;
+}
+.green {
+  background: #27c93f;
+}
+
+.title {
+  margin-left: 10px;
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+.terminal-body {
+  padding: 1.5rem;
 }
 
 .terminal-output {
   white-space: pre-wrap;
-  line-height: 1.6;
+  line-height: 1.7;
+  font-size: 0.95rem;
 }
 
 .line {
@@ -40,7 +86,6 @@ body {
 .prompt {
   color: var(--accent);
   margin-right: 0.5rem;
-  white-space: nowrap;
 }
 
 input {
@@ -51,6 +96,7 @@ input {
   font-family: inherit;
   font-size: 1rem;
   width: 100%;
+  caret-color: var(--accent);
 }
 
 a {
@@ -62,24 +108,8 @@ a:hover {
   text-decoration: underline;
 }
 
-input {
-  caret-color: var(--accent);
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-.prompt {
-  text-shadow: 0 0 5px rgba(0, 255, 144, 0.6);
-}
-
 @media (max-width: 600px) {
-  .terminal-container {
-    padding: 1.2rem;
-  }
-
-  input {
-    font-size: 0.95rem;
+  .terminal-body {
+    padding: 1rem;
   }
 }
