@@ -5,14 +5,12 @@
   --terminal-bg: #0d1117;
   --text: #c9d1d9;
   --accent: #f7a041;
-  --green: #3fb950;
   --border: #30363d;
   --link: #58a6ff;
 }
 
 body {
   margin: 0;
-  padding: 0;
   background: var(--bg);
   color: var(--text);
   font-family: "IBM Plex Mono", monospace;
@@ -27,9 +25,9 @@ body {
 .terminal-window {
   background: var(--terminal-bg);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .terminal-header {
@@ -47,19 +45,13 @@ body {
   border-radius: 50%;
 }
 
-.red {
-  background: #ff5f56;
-}
-.yellow {
-  background: #ffbd2e;
-}
-.green {
-  background: #27c93f;
-}
+.red { background: #ff5f56; }
+.yellow { background: #ffbd2e; }
+.green { background: #27c93f; }
 
 .title {
   margin-left: 10px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   opacity: 0.6;
 }
 
@@ -107,7 +99,7 @@ a {
 a:hover {
   text-decoration: underline;
 }
-
+=
 @media (max-width: 600px) {
   .terminal-body {
     padding: 1rem;
