@@ -1,0 +1,192 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { SITE } from "../data/site";
+import { CURRENT } from "../data/current";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog");
+
+const latestPosts = posts
+  .filter((post) => !post.data.draft)
+  .sort(
+    (a, b) =>
+      b.data.date.getTime() -
+      a.data.date.getTime()
+  )
+  .slice(0, 3);
+
+const projects = await getCollection("projects");
+
+const featuredProjects = projects
+  .filter((project) => project.data.featured)
+  .slice(0, 3);
+---
+
+<BaseLayout title={SITE.name}>
+  <section class="intro-section">
+    <h1 class="hero-title">{SITE.name}</h1>
+    <p class="hero-intro">
+      I build software and study systems.
+      I'm currently exploring distributed systems,
+      AI infrastructure, developer tooling,
+      and research-driven engineering.
+      This is my engineering notebook.
+    </p>
+  </section>
+
+  <hr />
+
+  <section class="writing-section">
+    <h2>Latest Writing</h2>
+    <div class="post-list">
+      {
+        latestPosts.map((post) => {
+          const formattedDate = new Date(post.data.date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          });
+          return (
+            <div class="post-row">
+              <time class="post-date" datetime={new Date(post.data.date).toISOString()}>{formattedDate}</time>
+              <a href={`/blog/${post.id}`} class="post-link">
+                {post.data.title}
+              </a>
+            </div>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <hr />
+
+  <section class="current-section">
+    <h2>Currently Building</h2>
+    <div class="current-projects">
+      {
+        CURRENT.map((project) => (
+          <div class="current-project">
+            <h3>{project.title}</h3>
+            <p>{project.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <hr />
+
+  <section class="projects-section">
+    <h2>Featured Work</h2>
+    <div class="project-list">
+      {
+        featuredProjects.map((project) => (
+          <ProjectCard project={project} />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.intro-section {
+  padding-top: 0.5rem;
+}
+
+.hero-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
+  color: var(--text);
+}
+
+.hero-intro {
+  font-size: 1.05rem;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 0;
+}
+
+h2 {
+  font-size: 0.8rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 600;
+  color: var(--muted);
+  margin-top: 0;
+  margin-bottom: 1.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.post-row {
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+}
+
+.post-date {
+  font-family: "IBM Plex Mono", monospace;
+  color: var(--muted);
+  font-size: 0.8rem;
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.post-link {
+  color: var(--text);
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: all 0.15s ease;
+}
+
+.post-link:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+.current-projects {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.current-project h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.current-project p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.project-list {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 500px) {
+  .post-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+}
+</style>

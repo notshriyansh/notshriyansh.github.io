@@ -1,0 +1,103 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { getCollection } from "astro:content";
+
+const projects = await getCollection("projects");
+
+const featuredProjects = projects.filter(
+  (project) => project.data.featured
+);
+
+const otherProjects = projects.filter(
+  (project) => !project.data.featured
+);
+---
+
+<BaseLayout title="Projects">
+  <header class="page-header">
+    <h1>Projects</h1>
+    <p class="subtitle">
+      Systems engineering, compiler architectures, developer tooling, and distributed machine learning platforms.
+    </p>
+  </header>
+
+  <section class="projects-section">
+    <h2>Featured Systems</h2>
+    <div class="project-list">
+      {
+        featuredProjects.length > 0 ? (
+          featuredProjects.map((project) => (
+            <ProjectCard project={project} />
+          ))
+        ) : (
+          <p class="empty-state">No featured projects listed.</p>
+        )
+      }
+    </div>
+  </section>
+
+  {
+    otherProjects.length > 0 && (
+      <section class="projects-section">
+        <h2>Other Work</h2>
+        <div class="project-list">
+          {
+            otherProjects.map((project) => (
+              <ProjectCard project={project} />
+            ))
+          }
+        </div>
+      </section>
+    )
+  }
+</BaseLayout>
+
+<style>
+.page-header {
+  margin-bottom: 2.5rem;
+}
+
+.page-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 600px;
+}
+
+.projects-section {
+  margin-bottom: 2.5rem;
+}
+
+.projects-section h2 {
+  font-size: 0.8rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.project-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.empty-state {
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.9rem;
+}
+</style>

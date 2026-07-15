@@ -1,0 +1,56 @@
+---
+import "../styles/globals.css";
+
+import "@fontsource/inter";
+import "@fontsource/ibm-plex-mono";
+
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "Software engineering, distributed systems, AI, and project notes.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <title>
+      {title === "Shriyansh Sharma"
+        ? title
+        : `${title} | Shriyansh Sharma`}
+    </title>
+
+    <meta name="description" content={description} />
+
+    <!-- OpenGraph Metadata -->
+    <meta property="og:title" content={title === "Shriyansh Sharma" ? title : `${title} | Shriyansh Sharma`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Shriyansh Sharma" />
+
+    <!-- Twitter Metadata -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title === "Shriyansh Sharma" ? title : `${title} | Shriyansh Sharma`} />
+    <meta name="twitter:description" content={description} />
+  </head>
+  <body>
+    <div class="container">
+      <Navbar />
+      <main id="main-content">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>

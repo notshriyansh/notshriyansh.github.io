@@ -1,0 +1,95 @@
+---
+import { calculateReadingTime } from "../utils/readingTime";
+
+const { post } = Astro.props;
+const readingTime = calculateReadingTime(post.body || "");
+const formattedDate = new Date(post.data.date).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+---
+
+<a href={`/blog/${post.id}`} class="item" aria-label={`Read post: ${post.data.title}`}>
+  <div class="metadata">
+    <time datetime={new Date(post.data.date).toISOString()} class="date">{formattedDate}</time>
+    {readingTime > 0 && <span class="reading-time">{readingTime} min read</span>}
+  </div>
+
+  <div class="content">
+    <h3>{post.data.title}</h3>
+    <p>{post.data.description}</p>
+  </div>
+</a>
+
+<style>
+.item {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 2rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: border-color 0.15s ease;
+}
+
+.item:hover {
+  border-color: var(--muted);
+}
+
+.item:hover h3 {
+  color: var(--accent);
+}
+
+.metadata {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.date {
+  font-weight: 500;
+}
+
+.reading-time {
+  font-size: 0.75rem;
+}
+
+.content h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+  transition: color 0.15s ease;
+}
+
+.content p {
+  margin: 0.5rem 0 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 1rem 0;
+  }
+  
+  .metadata {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .metadata .reading-time::before {
+    content: "·";
+    margin-right: 0.5rem;
+    color: var(--border);
+  }
+}
+</style>

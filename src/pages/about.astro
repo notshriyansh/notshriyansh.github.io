@@ -1,0 +1,157 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="About">
+  <article class="about-page">
+    <header class="page-header">
+      <h1>About</h1>
+    </header>
+
+    <div class="content">
+
+      <p>
+        I'm Shriyansh Sharma, a software engineer interested in systems.
+      </p>
+
+      <p>
+        Most of my time is spent building projects
+        and studying how complex software systems are designed.
+      </p>
+
+      <p>
+        I enjoy working across the boundary between software engineering and machine learning.
+        Recently that has meant exploring distributed systems, developer tooling,
+        AI infrastructure, and architecture-aware engineering tools.
+      </p>
+
+      <p>
+        A recurring theme in my projects is understanding how things work internally.
+      </p>
+
+      <p>
+        Whether it's a distributed job queue, an AI agent runtime,
+        a repository analysis system, or a research paper,
+        I enjoy breaking systems apart, understanding their abstractions,
+        and rebuilding them from first principles.
+      </p>
+
+      <h2>Current Areas of Interest</h2>
+
+      <ul>
+        <li>Distributed systems</li>
+        <li>Backend engineering</li>
+        <li>AI infrastructure</li>
+        <li>Developer tooling</li>
+        <li>Systems programming</li>
+        <li>Machine learning systems</li>
+      </ul>
+
+      <h2>Projects</h2>
+
+      <p>
+        Some projects I'm currently working on:
+      </p>
+
+      <ul>
+        <li>
+          <strong>Implementr</strong> : an architecture-aware platform that helps engineers move from research papers to implementation blueprints.
+        </li>
+
+        <li>
+          <strong>Distributed AI Platform</strong> : an event-driven inference platform built around Redis Streams, worker orchestration, and realtime observability.
+        </li>
+
+        <li>
+          <strong>AI Guardrails Agent</strong> : an MCP-enabled agent runtime with policy enforcement and human approval workflows.
+        </li>
+      </ul>
+
+      <p>
+        This website is my engineering notebook.
+      </p>
+
+      <p>
+        I use it to document projects, technical explorations,
+        implementation notes, architecture decisions,
+        and lessons learned while building software.
+      </p>
+
+      <p>
+        You can explore ongoing work on the{" "}
+        <a href="/projects">Projects</a> page,
+        read technical writing on the{" "}
+        <a href="/blog">Writing</a> page,
+        or browse source code on{" "}
+        <a
+          href="https://github.com/notshriyansh"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>.
+      </p>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.page-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--text);
+}
+
+.content {
+  line-height: 1.75;
+  color: #c9d1d9;
+}
+
+.content p {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.025rem;
+}
+
+.content h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.content ul {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  padding-left: 1.25rem;
+}
+
+.content li {
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.content li strong {
+  color: var(--text);
+}
+
+.content a {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-underline-offset: 4px;
+}
+
+.content a:hover {
+  text-decoration-color: var(--accent);
+  color: var(--accent);
+}
+</style>

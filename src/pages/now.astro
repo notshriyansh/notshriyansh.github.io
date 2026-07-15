@@ -1,0 +1,169 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Now">
+  <article class="now-page">
+    <header class="page-header">
+      <h1>Now</h1>
+      <p class="subtitle">
+        What I'm currently focused on.
+      </p>
+    </header>
+
+    <div class="content">
+
+      <div class="metadata">
+        Last updated: July 2026
+      </div>
+
+      <p>
+        This page is a snapshot of what I'm focused on right now.
+      </p>
+
+      <h2>Building</h2>
+
+      <h3>Implementr</h3>
+
+      <p>
+        Most of my engineering time is currently spent on Implementr.
+      </p>
+
+      <p>
+        The project started as a way to connect research papers with repositories,
+        but it has gradually evolved into something more interesting:
+        understanding what exists in a codebase, what is missing,
+        and what would need to change to reproduce ideas from research.
+      </p>
+
+      <p>
+        Lately I've been working on repository understanding,
+        concept extraction, architecture analysis,
+        and implementation planning.
+      </p>
+
+      <h3>Distributed AI Platform</h3>
+
+      <p>
+        I'm also exploring distributed systems through a small inference platform built around
+        Redis Streams, consumer groups, worker orchestration,
+        and realtime observability.
+      </p>
+
+      <p>
+        The goal isn't necessarily the platform itself.
+      </p>
+
+      <p>
+        The goal is understanding the engineering patterns that appear in production systems.
+      </p>
+
+      <h2>Reading</h2>
+
+      <ul>
+        <li>System Design Interview by Alex Xu</li>
+      </ul>
+
+      <h2>Learning</h2>
+
+      <p>
+        Recently I've been spending a lot of time learning:
+      </p>
+
+      <ul>
+        <li>Distributed systems</li>
+        <li>Backend architecture</li>
+        <li>Systems programming</li>
+        <li>AI infrastructure</li>
+      </ul>
+
+      <p>
+        I'm particularly interested in understanding
+        why systems are designed the way they are,
+        not just how to use them.
+      </p>
+
+      <h2>Looking Ahead</h2>
+
+      <ul>
+        <li>Continue developing Implementr</li>
+        <li>Build stronger distributed systems intuition</li>
+        <li>Read more research papers</li>
+        <li>Write more technical blog posts</li>
+        <li>Ship more complete projects</li>
+      </ul>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.page-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.subtitle a {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-underline-offset: 4px;
+}
+
+.subtitle a:hover {
+  text-decoration-color: var(--accent);
+  color: var(--accent);
+}
+
+.content {
+  line-height: 1.75;
+  color: #c9d1d9;
+}
+
+.metadata {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8rem;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.content h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.content ul {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  padding-left: 1.25rem;
+}
+
+.content li {
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.content li strong {
+  color: var(--text);
+}
+</style>
